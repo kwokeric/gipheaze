@@ -8,13 +8,31 @@ class Header extends Component {
   constructor(props) {
     super(props);
 
+    this._handleClick = this._handleClick.bind(this);
     this._handleKeyPress = this._handleKeyPress.bind(this);
+
+    this.state = {
+      query: this.props.query || ""
+    }
+  }
+
+  componentDidMount() {
+    if (this.state.query) {
+      // putting the query on the store via Redux would make this cleaner
+      let input = document.getElementById("search-input");
+      input.value = this.props.query;
+    }
   }
 
   _handleKeyPress(e) {
     if (e.key === 'Enter') {
       this.props.handleSearch(e.target.value);
     }
+  }
+
+  _handleClick() {
+    let input = document.getElementById("search-input");
+    this.props.handleSearch(input.value);
   }
 
   render() {
@@ -27,13 +45,12 @@ class Header extends Component {
           </div>
           <div className="search-container">
             <input
-              className="search-input"
+              id="search-input"
               type="text"
               name="search-input"
               onKeyPress={this._handleKeyPress}
-              value={this.props.query ? this.props.query : ""}
             />
-            <div className="search-icon">
+            <div className="search-icon" onClick={this._handleClick}>
               <img src={SEARCH_PNG} alt="search-icon" />
             </div>
           </div>

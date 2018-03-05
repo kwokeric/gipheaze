@@ -37,20 +37,23 @@
   flex-direction: row;
   justify-content: flex-start;
 }
-.search-input {
+#search-input {
   width: 50vw;
   height: 40px;
   font-size: 24px;
   border: none;
   padding: 0 0 0 10px;
 }
-.search-input:focus {
+#search-input:focus {
   outline: none;
 }
 .search-icon {
   width: 40px;
   height: 40px;
   background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+}
+.search-icon:hover {
+  cursor: pointer;
 }
 .search-icon img {
   padding: 5px;

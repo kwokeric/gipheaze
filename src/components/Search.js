@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import './Search.css';
+import { browserHistory } from 'react-router';
 
+import './Search.css';
 import Header from './Header.js';
+import Results from './Results.js';
 
 class Search extends Component {
   constructor(props) {
@@ -10,27 +12,41 @@ class Search extends Component {
     this.handleSearch = this.handleSearch.bind(this);
 
     this.state = {
-      searchQuery: props.params.query || ""
+      searchQuery: props.params.query || "",
+      data: {}
     };
   }
 
   handleSearch(query) {
-    console.log(query)
-    // browserHistory.push(`/search{this.state.searchQuery}`);
+    browserHistory.push(`/search/${query}`);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.params.query != this.state.searchQuery) {
+      this.fetchResults(nextProps.params.query);
+    }
+  }
+
+  fetchResults(query) {
+    fetch("https://api.giphy.com/v1/gifs/search?api_key=7PdF03M1ELI9KIt5L6EmkA9fjndmIa38&q=" + query + "&limit=25&offset=0&rating=G&lang=en")
+    .then((response) => (
+      response.json()
+    ))
+    .then((JSON) => {
+      this.setState({data: JSON.data});
+    });
   }
 
   render() {
-    console.log(this.state.searchQuery)
     return (
-      <div className="App">
+      <div className="search">
         <Header
           query={this.state.searchQuery}
           handleSearch={this.handleSearch}
         />
-
-        <div className="lit">
-          SEARCHHH
-        </div>
+        <Results
+          data={this.state.data}
+        />
       </div>
     );
   }
