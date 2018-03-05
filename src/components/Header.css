@@ -25,6 +25,9 @@
   align-items: center;
   padding: 10px 0;
 }
+.top-container:hover {
+  cursor: pointer;
+}
 .logo {
   float: left;
   font-size: 34px;

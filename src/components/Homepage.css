@@ -3,6 +3,11 @@ html {
   background-color: black;
 }
 
-.homepage {
-
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
+  height: 30px;
 }

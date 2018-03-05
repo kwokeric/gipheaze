@@ -21,6 +21,10 @@ class Search extends Component {
     browserHistory.push(`/search/${query}`);
   }
 
+  componentWillMount() {
+    this.fetchResults(this.props.params.query);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.params.query != this.state.searchQuery) {
       this.fetchResults(nextProps.params.query);

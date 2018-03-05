@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
+
 import './Header.css';
 
 const LOGO_PNG = require('../static/logo.png')
@@ -9,6 +11,7 @@ class Header extends Component {
     super(props);
 
     this._handleClick = this._handleClick.bind(this);
+    this._handleHomepageClick = this._handleHomepageClick.bind(this);
     this._handleKeyPress = this._handleKeyPress.bind(this);
 
     this.state = {
@@ -22,6 +25,10 @@ class Header extends Component {
       let input = document.getElementById("search-input");
       input.value = this.props.query;
     }
+  }
+
+  _handleHomepageClick() {
+    browserHistory.push("/")
   }
 
   _handleKeyPress(e) {
@@ -39,7 +46,7 @@ class Header extends Component {
     return (
       <div className="header">
         <div className="header-container">
-          <div className="top-container">
+          <div className="top-container" onClick={this._handleHomepageClick}>
             <img src={LOGO_PNG} alt="logo" />
             <div className="logo">GIPHEAZE</div>
           </div>

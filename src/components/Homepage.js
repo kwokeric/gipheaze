@@ -41,13 +41,10 @@ class Homepage extends Component {
         <Header
           handleSearch={this.handleSearch}
         />
+        <div className="title">TRENDING GIFS</div>
         <Results
           data={this.state.data}
         />
-
-        <p className="Homepage-intro">
-          To get started, edit <code>src/Homepage.js</code> and save to reload.
-        </p>
       </div>
     );
   }
