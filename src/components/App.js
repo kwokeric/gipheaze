@@ -8,6 +8,7 @@ class App extends Component {
     super(props);
 
     this.assignResultExperiment = this.assignResultExperiment.bind(this);
+    this.assignPaginationExperiment = this.assignPaginationExperiment.bind(this);
   }
 
   componentWillMount() {
@@ -19,6 +20,7 @@ class App extends Component {
     */
 
     this.assignResultExperiment();
+    this.assignPaginationExperiment();
   }
 
   assignResultExperiment() {
@@ -33,6 +35,20 @@ class App extends Component {
     */
     // localStorage.setItem("resultExperimentBucket", "A");
     // localStorage.setItem("resultExperimentBucket", "B");
+  }
+
+  assignPaginationExperiment() {
+    // check local storage for Result Experiment bucketting
+    if (!localStorage.getItem("paginationExperimentBucket")) {
+      let resultTestCase = Math.random() < 0.5 ? "A" : "B";
+      localStorage.setItem("paginationExperimentBucket", resultTestCase);
+    }
+    /*
+      A: user must click arrows to load more gifs
+      B: user scrolls to bottom to load more gifs (infinite scroll)
+    */
+    // localStorage.setItem("paginationExperimentBucket", "A");
+    // localStorage.setItem("paginationExperimentBucket", "B");
   }
 
   render() {
