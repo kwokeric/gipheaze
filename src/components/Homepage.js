@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router';
 
 import './Homepage.css';
 import Header from './Header.js';
-import Results from './Results.js';
+import ResultsA from './ResultsA.js';
 
 class Homepage extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class Homepage extends Component {
   }
 
   fetchHomepage() {
-    fetch("https://api.giphy.com/v1/gifs/trending?api_key=7PdF03M1ELI9KIt5L6EmkA9fjndmIa38&limit=25&rating=G")
+    fetch("https://api.giphy.com/v1/gifs/trending?api_key=7PdF03M1ELI9KIt5L6EmkA9fjndmIa38&limit=24&rating=G")
     .then((response) => (
       response.json()
     ))
@@ -42,7 +42,7 @@ class Homepage extends Component {
           handleSearch={this.handleSearch}
         />
         <div className="title">TRENDING GIFS</div>
-        <Results
+        <ResultsA
           data={this.state.data}
         />
       </div>

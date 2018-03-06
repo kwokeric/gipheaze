@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router';
 
 import './Search.css';
 import Header from './Header.js';
-import Results from './Results.js';
+import ResultsA from './ResultsA.js';
 
 class Search extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class Search extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.query != this.state.searchQuery) {
+    if (nextProps.params.query !== this.state.searchQuery) {
       this.fetchResults(nextProps.params.query);
     }
   }
@@ -48,7 +48,7 @@ class Search extends Component {
           query={this.state.searchQuery}
           handleSearch={this.handleSearch}
         />
-        <Results
+        <ResultsA
           data={this.state.data}
         />
       </div>

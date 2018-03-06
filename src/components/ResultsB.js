@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 
-import './Results.css';
+import './ResultsB.css';
 
-class Results extends Component {
-  onClick(task) {
-    // window.open(`https://app.asana.com/0/${task.workspace.id}/${task.id}`, "_blank")
+class ResultsB extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  onClick(gif) {
+    // open modal or show div
   }
 
   renderGifs() {
     let data = this.props.data;
+
     return data.map((gif, idx) => (
       this.renderGif(gif, idx)
-    ))
+    ));
   }
 
   renderGif(gif, idx) {
@@ -43,4 +48,4 @@ class Results extends Component {
   }
 }
 
-export default Results;
+export default ResultsB;
