@@ -8,7 +8,8 @@ class ResultsB extends Component {
   }
 
   onClick(gif) {
-    // open modal or show div
+    // log click data to analyze how many users click through to the gif page
+    window.open(`${gif.url}`, "_blank");
   }
 
   renderGifs() {
@@ -20,16 +21,26 @@ class ResultsB extends Component {
   }
 
   renderGif(gif, idx) {
+    // meta-data has some faker start rating data
     return (
       <div
-        className="gif-container"
+        className="gif-container-b"
         key={`idx-${idx}`}
       >
         <div
-          className="gif"
+          className="gif-b"
           onClick={() => this.onClick(gif)}
         >
           <img src={gif.images.downsized.url} />
+        </div>
+        <div className="gif-b-meta">
+          RATING: ★★★★☆
+          <br/>
+          TITLE: {gif.title ? gif.title : "none" }
+          <br/>
+          USER: {gif.username ? gif.username : "n/a" }
+          <br/>
+          <a href={gif.source}>SOURCE</a>
         </div>
       </div>
     )

@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 import './Homepage.css';
 import Header from './Header.js';
 import ResultsA from './ResultsA.js';
+import ResultsB from './ResultsB.js';
 
 class Homepage extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class Homepage extends Component {
           handleSearch={this.handleSearch}
         />
         <div className="title">TRENDING GIFS</div>
-        <ResultsA
+        <ResultsB
           data={this.state.data}
         />
       </div>

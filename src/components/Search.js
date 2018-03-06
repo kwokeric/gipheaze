@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 import './Search.css';
 import Header from './Header.js';
 import ResultsA from './ResultsA.js';
+import ResultsB from './ResultsB.js';
 
 class Search extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class Search extends Component {
           query={this.state.searchQuery}
           handleSearch={this.handleSearch}
         />
-        <ResultsA
+        <ResultsB
           data={this.state.data}
         />
       </div>
