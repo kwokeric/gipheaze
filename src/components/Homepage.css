@@ -3,11 +3,12 @@ html {
   background-color: black;
 }
 
-.title {
+.homepage-title {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #ccc;
   height: 30px;
+  letter-spacing: 1px;
 }

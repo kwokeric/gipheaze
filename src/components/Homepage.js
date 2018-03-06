@@ -42,10 +42,16 @@ class Homepage extends Component {
         <Header
           handleSearch={this.handleSearch}
         />
-        <div className="title">TRENDING GIFS</div>
-        <ResultsB
-          data={this.state.data}
-        />
+        <div className="homepage-title">TRENDING NOW</div>
+        {
+          localStorage.getItem("resultExperimentBucket") === "A" ?
+          <ResultsA
+            data={this.state.data}
+          /> :
+          <ResultsB
+            data={this.state.data}
+          />
+        }
       </div>
     );
   }

@@ -33,7 +33,7 @@ class Search extends Component {
   }
 
   fetchResults(query) {
-    fetch("https://api.giphy.com/v1/gifs/search?api_key=7PdF03M1ELI9KIt5L6EmkA9fjndmIa38&q=" + query + "&limit=25&offset=0&rating=G&lang=en")
+    fetch("https://api.giphy.com/v1/gifs/search?api_key=7PdF03M1ELI9KIt5L6EmkA9fjndmIa38&q=" + query + "&limit=24&offset=0&rating=G&lang=en")
     .then((response) => (
       response.json()
     ))
@@ -49,9 +49,15 @@ class Search extends Component {
           query={this.state.searchQuery}
           handleSearch={this.handleSearch}
         />
-        <ResultsB
-          data={this.state.data}
-        />
+        {
+          localStorage.getItem("resultExperimentBucket") === "A" ?
+          <ResultsA
+            data={this.state.data}
+          /> :
+          <ResultsB
+            data={this.state.data}
+          />
+        }
       </div>
     );
   }
