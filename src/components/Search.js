@@ -6,6 +6,8 @@ import Header from './Header.js';
 import ResultsA from './ResultsA.js';
 import ResultsB from './ResultsB.js';
 
+const RESULTS_PER_PAGE = 12;
+
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +35,8 @@ class Search extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.params.query !== this.state.searchQuery) {
-      this.fetchResults(nextProps.params.query);
+      const isNewQuery = true;
+      this.fetchResults(nextProps.params.query, isNewQuery);
     }
   }
 
@@ -41,14 +44,21 @@ class Search extends Component {
     browserHistory.push(`/search/${query}`);
   }
 
-  fetchResults(query = this.props.params.query) {
+  fetchResults(query = this.props.params.query, isNewQuery = false) {
+    // the API key should not be hardcoded in a production app
     fetch("https://api.giphy.com/v1/gifs/search?api_key=7PdF03M1ELI9KIt5L6EmkA9fjndmIa38&q=" +
-      query + "&limit=24&offset=" + (this.state.data.length) + "&rating=G&lang=en")
+      query + "&limit=" + RESULTS_PER_PAGE + "&offset=" + (this.state.data.length) + "&rating=G&lang=en")
     .then((response) => (
       response.json()
     ))
     .then((JSON) => {
-      this.setState({ data: this.state.data.concat(JSON.data) });
+      if (isNewQuery) {
+        // replace previous data
+        this.setState({ data: JSON.data });
+      } else {
+        // add to previous data
+        this.setState({ data: this.state.data.concat(JSON.data) });
+      }
     });
   }
 
@@ -57,7 +67,7 @@ class Search extends Component {
   }
 
   handleNextPageClick() {
-    if (this.state.data.length / 24 === this.state.pageNumber) {
+    if (this.state.data.length / RESULTS_PER_PAGE === this.state.pageNumber) {
       this.fetchResults();
     }
 
@@ -93,7 +103,7 @@ class Search extends Component {
   render() {
     let data;
     if (localStorage.getItem("paginationExperimentBucket") === "A") {
-      data = this.state.data.slice((this.state.pageNumber - 1)*24, (this.state.pageNumber)*24);
+      data = this.state.data.slice((this.state.pageNumber - 1) * RESULTS_PER_PAGE, (this.state.pageNumber) * RESULTS_PER_PAGE);
     } else {
       data = this.state.data;
     }
