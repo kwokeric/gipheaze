@@ -26,3 +26,22 @@
 .hidden {
   visibility: hidden;
 }
+.top-scroll-btn {
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-image: url('../static/top-scroll-btn-hover.png');
+  background-size: contain;
+}
+.top-scroll-btn:hover {
+  cursor: pointer;
+}
+.top-scroll-btn:hover img {
+  display: none;
+}
+.top-scroll-btn img {
+  width: 100%;
+  height: 100%;
+}

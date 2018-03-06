@@ -24,6 +24,7 @@ class ResultsA extends Component {
       >
         <img
           className="gif"
+          alt={`gif-${idx}`}
           src={gif.images.downsized_medium.url}
           onClick={() => this.onClick(gif)}
         />

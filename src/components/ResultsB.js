@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 import './ResultsB.css';
 
 class ResultsB extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   onClick(gif) {
     // log click data to analyze how many users click through to the gif page
     window.open(`${gif.url}`, "_blank");
@@ -31,7 +27,7 @@ class ResultsB extends Component {
           className="gif-b"
           onClick={() => this.onClick(gif)}
         >
-          <img src={gif.images.downsized.url} />
+          <img src={gif.images.downsized.url} alt={`gif-${idx}`}/>
         </div>
         <div className="gif-b-meta">
           RATING: ★★★★☆

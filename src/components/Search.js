@@ -6,6 +6,7 @@ import Header from './Header.js';
 import ResultsA from './ResultsA.js';
 import ResultsB from './ResultsB.js';
 
+const TOP_SCROLL_PNG = require('../static/top-scroll-btn.png')
 const RESULTS_PER_PAGE = 12;
 
 class Search extends Component {
@@ -15,8 +16,8 @@ class Search extends Component {
     this.fetchResults = this.fetchResults.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.handlePrevPageClick = this.handlePrevPageClick.bind(this);
-    this.handleNextPageClick = this.handleNextPageClick.bind(this);
+    this._handlePrevPageClick = this._handlePrevPageClick.bind(this);
+    this._handleNextPageClick = this._handleNextPageClick.bind(this);
 
     this.state = {
       searchQuery: props.params.query || "",
@@ -30,7 +31,13 @@ class Search extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
+    if (localStorage.getItem("paginationExperimentBucket") === "B") {
+      window.addEventListener("scroll", this.handleScroll);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -62,15 +69,16 @@ class Search extends Component {
     });
   }
 
-  handlePrevPageClick() {
+  _handlePrevPageClick() {
     this.setState({ pageNumber: this.state.pageNumber - 1 })
   }
 
-  handleNextPageClick() {
+  _handleNextPageClick() {
     if (this.state.data.length / RESULTS_PER_PAGE === this.state.pageNumber) {
       this.fetchResults();
     }
 
+    this.scrollToTop();
     this.setState({ pageNumber: this.state.pageNumber + 1 });
   }
 
@@ -81,21 +89,35 @@ class Search extends Component {
     const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
     const windowBottom = windowHeight + window.pageYOffset;
 
+    // fetch more results when user scrolls to bottom of page
     if (windowBottom >= docHeight) this.fetchResults();
   }
 
-  renderPage() {
+  scrollToTop() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
+  renderPageNumbers() {
     return (
       <div className="pageNumber-container">
         <span
           className={`prev-page ${this.state.pageNumber === 1 ? "hidden" : ""}`}
-          onClick={this.handlePrevPageClick}
+          onClick={this._handlePrevPageClick}
         >&#9664;</span>
         <span className="current-page-number">{this.state.pageNumber}</span>
         <span
           className="next-page"
-          onClick={this.handleNextPageClick}
+          onClick={this._handleNextPageClick}
         >&#9654;</span>
+      </div>
+    )
+  }
+
+  renderTopButton() {
+    return (
+      <div className="top-scroll-btn" onClick={this.scrollToTop}>
+        <img src={TOP_SCROLL_PNG} alt="top-scroll-icon" />
       </div>
     )
   }
@@ -125,8 +147,9 @@ class Search extends Component {
         }
         {
           localStorage.getItem("paginationExperimentBucket") === "A" ?
-            this.renderPage() : null
+            this.renderPageNumbers() : null
         }
+        { this.renderTopButton() }
       </div>
     );
   }
