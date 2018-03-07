@@ -1,7 +1,7 @@
 .results-container {
   width: 100%;
   height: 100%;
-  padding: 20px 5% 60px 5%;
+  padding: 20px 5% 150px 5%;
   box-sizing: border-box;
 }
 .gif-container-b {
@@ -42,7 +42,6 @@ a {
 a:hover {
   color: white;
 }
-
 @media (max-width: 520px) {
   .gif-container-b {
     flex-direction: column;

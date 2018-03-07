@@ -7,7 +7,7 @@ import ResultsA from './ResultsA.js';
 import ResultsB from './ResultsB.js';
 
 const TOP_SCROLL_PNG = require('../static/top-scroll-btn.png')
-const RESULTS_PER_PAGE = 12;
+const RESULTS_PER_PAGE = 24;
 
 class Search extends Component {
   constructor(props) {
@@ -48,6 +48,7 @@ class Search extends Component {
   }
 
   handleSearch(query) {
+    this.setState({ pageNumber: 1 });
     browserHistory.push(`/search/${query}`);
   }
 
@@ -70,6 +71,7 @@ class Search extends Component {
   }
 
   _handlePrevPageClick() {
+    this.scrollToTop();
     this.setState({ pageNumber: this.state.pageNumber - 1 })
   }
 

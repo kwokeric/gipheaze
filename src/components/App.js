@@ -14,9 +14,10 @@ class App extends Component {
   componentWillMount() {
     /*
       For a complex/production app, I would use a framework like Planout.js
-      to implement A/B tests. For this case, I'll simply randomly place users
+      to implement A/B tests. For simplicity, I'll simply randomly place users
       into test buckets and store which test bucket they fall into on
-      localStorage. Uncomment the comments to select test cases.
+      localStorage. Uncomment the comments to select specific test cases
+      or change it in dev tools (Application > Local Storage)
     */
 
     this.assignResultExperiment();
