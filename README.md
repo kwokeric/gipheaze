@@ -26,11 +26,11 @@ In this app, users initially see one single page full of results. To see more GI
 
 **A**: Users must click left or right arrows to see the next page of GIFs.
 
-![GIF cell test A](/static/cell-A.png)
+![pagination test A](/static/page-A.png)
 
 **B**: More results are loaded automatically when user scrolls to the bottom of the page.
 
-![GIF cell test B](/static/cell-B.png)
+![pagination test B](/static/page-B.png)
 
 **Expected results**: I expect the automatic loading of more pages to perform better in terms of user engagement. It is less effort to simply scroll than it is to click on a small icon - or a big icon for that matter. In general, users want to do less work, and anything that helps further that notion does better on a web app.
 
@@ -38,3 +38,5 @@ In this app, users initially see one single page full of results. To see more GI
 
 - Use of a state organizer like Redux to store data such as search queries
 - Implement actual logging and analysis of results with a A/B testing framework such as PlanOut or Optimizely
+- Refactoring out of large components into smaller, reusable components
+- Addition of a spinner to indicate loading status
