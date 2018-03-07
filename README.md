@@ -37,6 +37,8 @@ In this app, users initially see one single page full of results. To see more GI
 ### Possible improvements
 
 - Use of a state organizer like Redux to store data such as search queries
-- Implement actual logging and analysis of results with a A/B testing framework such as PlanOut or Optimizely
+- Implementation of logging and analysis of results with a A/B testing framework such as PlanOut or Optimizely
 - Refactoring out of large components into smaller, reusable components
+- Implementation of custom GIF page component
 - Addition of a spinner to indicate loading status
+- Limiting GIF rendering to "above the fold" to improve performance, ie: only render GIFs that the user can see
