@@ -124,6 +124,30 @@ class Search extends Component {
     )
   }
 
+  renderNoResults() {
+    return (
+      <div className="no-results">
+        NO GIFS FOUND
+      </div>
+    )
+  }
+
+  renderResults(data) {
+    if (!data.length) {
+      return this.renderNoResults();
+    } else {
+      return (
+        localStorage.getItem("resultExperimentBucket") === "A" ?
+        <ResultsA
+          data={data}
+        /> :
+        <ResultsB
+          data={data}
+        />
+      )
+    }
+  }
+
   render() {
     let data;
     if (localStorage.getItem("paginationExperimentBucket") === "A") {
@@ -138,17 +162,9 @@ class Search extends Component {
           query={this.state.searchQuery}
           handleSearch={this.handleSearch}
         />
+        { this.renderResults(data) }
         {
-          localStorage.getItem("resultExperimentBucket") === "A" ?
-          <ResultsA
-            data={data}
-          /> :
-          <ResultsB
-            data={data}
-          />
-        }
-        {
-          localStorage.getItem("paginationExperimentBucket") === "A" ?
+          data.length && localStorage.getItem("paginationExperimentBucket") === "A" ?
             this.renderPageNumbers() : null
         }
         { this.renderTopButton() }
